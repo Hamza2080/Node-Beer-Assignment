@@ -1,0 +1,250 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "beer",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3003/api"
+    }
+  ],
+  "paths": {
+    "/beer": {
+      "get": {
+        "summary": "Get all bear collection",
+        "tags": [
+          "Beer"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Beer"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "operationId": "get-beer",
+        "description": "get beer collection"
+      },
+      "post": {
+        "summary": "Create new beer collection",
+        "operationId": "post-beer",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Beer"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "tags": [
+          "Beer"
+        ],
+        "description": "create new beer collection",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "name": "beerSP",
+                    "beerType": "Pale out",
+                    "rating": "4"
+                  }
+                },
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "beerType": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "rating": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "name",
+                  "beerType"
+                ]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "name": "string",
+                    "beerType": "string",
+                    "rating": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/beer/{name}": {
+      "get": {
+        "summary": "Get beer by name",
+        "tags": [
+          "Beer"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Beer"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "operationId": "get-beer-beerId",
+        "description": "beer name search (partial or complete name in path param)"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "name",
+          "in": "path",
+          "required": true,
+          "description": "beer name (complete or partial)"
+        }
+      ]
+    },
+    "/beer/{beerId}": {
+      "get": {
+        "summary": "add beer rating",
+        "tags": [
+          "Beer"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "operationId": "get-beer-beerId",
+        "description": "add beer rating"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "beerId",
+          "in": "path",
+          "required": true,
+          "description": "beer id"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "Beer": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "averageRating": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "type",
+          "averageRating"
+        ],
+        "x-examples": {
+          "example-1": {
+            "id": "614852326c8942e5ffaa9446",
+            "name": "beerSP",
+            "type": "Pale out",
+            "averageRating": 1.6199999999999999
+          }
+        },
+        "examples": [
+          {
+            "id": "string",
+            "name": "string",
+            "type": "string",
+            "averageRating": 0
+          }
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Beer"
+    }
+  ]
+}

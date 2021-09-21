@@ -1,0 +1,17 @@
+
+version: '3.3'
+services:
+  nodejs-api-beer:
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "3003:3003"
+    container_name: nodejs-api-beer
+    links:
+      - mongo-db-beer
+    depends_on:
+      - mongo-db-beer
+  mongo-db-beer:
+    image: mongo
+    container_name: mongo-db-beer
