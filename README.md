@@ -1,5 +1,3 @@
-# Categories-test
-
 ### Running server
 npm run start OR node .
 
