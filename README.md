@@ -17,3 +17,12 @@ ATM we have setup docker-compose file, which first run
 
  - sudo docker-compose up --build -d
  - sudo docker logs --tail 100 containerId
+
+### Swagger docs
+    http://54.164.71.54/api-docs/
+
+#### APIS
+    - Get : /beer/{beerName} (full name or partial search)
+    - Patch: /beer/{beerId} update rating
+    - Post: /beer
+    - Get : /beer (get all beer collection)
